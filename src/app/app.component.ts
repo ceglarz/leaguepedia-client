@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {LeaguepediaSearchService} from "./services/leaguepedia-search.service";
 import {AsyncPipe, NgFor} from "@angular/common";
+import {Observable, Subject} from "rxjs";
 
 export interface Champion {
   id: number;
@@ -17,14 +18,18 @@ export interface Champion {
 })
 export class AppComponent {
   title = 'leaguepedia-client';
-  champions: Array<Champion> = [];
+  champions$ = new Observable<Array<Champion>>();
+  query$ = new Subject<string>();
 
   constructor(private leagupediaSearchService: LeaguepediaSearchService) {
+    this.query$.subscribe(query => this.search(query));
   }
 
   search(query: string) {
-    this.leagupediaSearchService.search(query)
-      .subscribe((champions) => this.champions = champions)
+    this.champions$ = this.leagupediaSearchService.search(query);
   }
 
+  identityChampion(index: number, champion: Champion) {
+    return champion.id;
+  }
 }
