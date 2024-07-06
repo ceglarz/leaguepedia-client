@@ -1,3 +1,15 @@
+
+<div>
+  <p>yo bratku, dałem se 🎉</p>
+  <h2>wyszukaj championa</h2>
+  <input (input)="search($any($event.target).value)">
+  <ul>
+    <li *ngFor="let champion of champions">{{champion.name}}</li>
+  </ul>
+
+</div>
+
+
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
 <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
