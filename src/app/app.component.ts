@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {LeaguepediaSearchService} from "./services/leaguepedia-search.service";
 import {AsyncPipe, NgFor} from "@angular/common";
-import {Observable, Subject} from "rxjs";
+import {debounceTime, Observable, Subject} from "rxjs";
 
 export interface Champion {
   id: number;
@@ -22,7 +22,9 @@ export class AppComponent {
   query$ = new Subject<string>();
 
   constructor(private leagupediaSearchService: LeaguepediaSearchService) {
-    this.query$.subscribe(query => this.search(query));
+    this.query$
+      .pipe(debounceTime(350))
+      .subscribe(query => this.search(query));
   }
 
   search(query: string) {
