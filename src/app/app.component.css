@@ -1,3 +1,13 @@
+.flex-container {
+  display: flex;
+}
+
+.flex-container div {
+  background-color: #c9d1cb;
+  margin: 10px;
+  padding: 10px;
+}
+
 
 :host {
   --bright-blue: oklch(51.01% 0.274 263.83);

@@ -1,12 +1,35 @@
+<h2 xmlns:max-width="http://www.w3.org/1999/xhtml">Welcome on Leaguepedia </h2>
+<div class="flex-container">
+  <div>
+    <h2>search champion: </h2>
+    <input (input)="query$.next($any($event.target).value)">
+    <ul>
+      <li *ngFor="let champion of champions$ | async; trackBy: identityChampion">
+        <!--      {{champion.name}}-->
+        <button type="button" (click)="onSelect(champion)">{{champion.name}}</button>
+      </li>
 
-<div>
-  <p>yo bratku, dałem se 🎉</p>
-  <h2>wyszukaj championa</h2>
-  <input (input)="query$.next($any($event.target).value)">
-  <ul>
-    <li *ngFor="let champion of champions$ | async; trackBy: identityChampion">{{champion.name}}</li>
-  </ul>
+    </ul>
+  </div>
+
+  <div *ngIf="selectedChampion">
+    <img src="{{selectedChampion.imageUri}}" alt="{{selectedChampion.name}}" style="max-width: 500px;">
+    <h2>{{selectedChampion.name}}</h2>
+    <div>
+      <label>id: </label>
+      <input placeholder="{{selectedChampion.id}}">
+    </div>
+    <div>
+      <label>name: </label>
+      <input placeholder="{{selectedChampion.name}}">
+    </div>
+    <div>
+      <label>faction: </label>
+      <input placeholder="{{selectedChampion.faction}}">
+    </div>
+  </div>
 </div>
+
 
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
